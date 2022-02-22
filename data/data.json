@@ -1,0 +1,57 @@
+[
+  {
+    "category": "Action Figures",
+    "toys": [
+      {
+        "name": "Olho Tandera",
+        "image": "images/toy_001.jpg",
+        "whatsapp": "319999999999",
+        "value": "100,00"
+      },
+      {
+        "name": "Exemplo Brinquedo 2",
+        "image": "images/toy_002.jpg",
+        "whatsapp": "319999999999",
+        "value": "200,00"
+      }
+    ]
+  },
+  {
+    "category": "Vehicles",
+    "toys": [
+      {
+        "name": "Exemplo Brinquedo 3",
+        "image": "images/toy_003.jpg",
+        "whatsapp": "319999999999",
+        "value": "50,00"
+      },
+      {
+        "name": "Exemplo Brinquedo 4",
+        "image": "images/toy_004.jpg",
+        "whatsapp": "319999999999",
+        "value": "10,00"
+      }
+    ]
+  },
+  {
+    "category": "Plush",
+    "toys": [
+      {
+        "name": "Exemplo Brinquedo 5",
+        "image": "images/toy_003.jpg",
+        "whatsapp": "319999999999",
+        "value": "150,00"
+      },
+      {
+        "name": "Exemplo Brinquedo 6",
+        "image": "images/toy_004.jpg",
+        "whatsapp": "319999999999",
+        "value": "120,00"
+      }
+    ]
+  },
+  {
+    "category": "Empty",
+    "toys": []
+  }
+]
