@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="shortcut icon" href="icons/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="icons/favicon.ico" type="image/x-icon">
+
+    <!-- Bootstrap CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/styles.css" rel="stylesheet">
+
+    <link href="manifest.json" rel="manifest">
+
+    <!-- iOS meta tags and icons -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="App Storm">
+    <link rel="apple-touch-icon" href="icons/152.png">
+
+    <meta name="description" content="App Storm">
+    <meta name="theme-color" content="#f8931d" />
+
+    <title>App Storm</title>
+  </head>
+  <body>
+
+    <header class="container-fluid fixed-top">
+
+        <img src="imgs/logo.png" class="logo">
+
+    </header>
+
+    <section class="container" style="margin-top: 100px;">
+
+        <div class="row">
+            <div class="col-12">
+                <div class="alert alert-warning" role="alert">
+                    <img src="imgs/offline.png" width="30">
+                    Você está acessando esse app offline. Veja os ultimos itens visitados.
+                  </div>
+            </div>
+        </div>
+
+    </section>
+
+    <main class="container" id="content" style="margin-top: 10px;">
+            
+    </main>
+
+
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script>
+
+//Carregamento AJAX
+let ajax = new XMLHttpRequest();
+
+ajax.open("GET", "./dados.json", true);
+
+ajax.send();
+
+//Monitorar o retorno requisição
+ajax.onreadystatechange = function()
+{
+    //Especificar o container que recebe o conteudo gerado neste arquivo
+    let content = document.getElementById("content");
+
+    if (this.readyState == 4 && this.status == 200) {
+    
+     let data_json = JSON.parse(ajax.responseText);
+
+     if(data_json.length == 0){
+
+        content.innerHTML = '<div class="alert alert-warning" role="alert">Desculpe. Ainda não temos brinquedos cadastrados!</div>';
+     
+    }else{
+        
+        let html_content = "";
+
+        for(let i = 0; i<data_json.length; i++){
+        
+            html_content +='<div class="row"><div class="col-12"><h2><span> </span> '+data_json[i].categoria+'</h2></div></div>';
+
+            if(data_json[i].brinquedos.length == 0){
+
+                html_content += '<div class="row"><div class="col-12"><div class="alert alert-warning" role="alert">Desculpe. Não temos brinquedos para esta categoria.</div></div></div>';
+
+            }else{
+
+                html_content += '<div class="row">';
+
+                for(let j = 0; j<data_json[i].brinquedos.length; j++){                        
+
+                    html_content += card_brinquedo(data_json[i].brinquedos[j].nome,data_json[i].brinquedos[j].imagem,data_json[i].brinquedos[j].valor,data_json[i].brinquedos[j].whatsapp);
+    
+                }
+
+                html_content += '</div>';                                    
+            }
+
+        }
+
+        content.innerHTML = html_content;        
+    }
+
+    }
+}
+
+
+//Template Card Brinquedo
+var card_brinquedo = function(nome, imagem, valor, whatsapp)
+{
+
+    return '<div class="col-lg-6">'+
+                '<div class="card">'+
+                    '<img src="'+imagem+'" class="card-img-top" alt="'+nome+'">'+
+                    '<div class="card-body">'+
+                        '<h5 class="card-title">'+nome+'</h5>'+
+                        '<p class="card-text"><strong>Valor:</strong> '+valor+'</p>'+                        
+                    '</div>'+
+                '</div>'+
+            '</div>';
+
+}
+
+    </script>
+
+
+
+  </body>
+</html>

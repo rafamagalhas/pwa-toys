@@ -51,10 +51,9 @@ self.addEventListener("fetch", (evt) => {
   }
 
   evt.respondWith(
-    fetch(evt.request).catch(() => {
-      return caches.open(CACHE_NAME).then((cache) => {
-        return cache.match("offline.html");
-      });
+    fetch(evt.request).catch(async () => {
+      const cache = await caches.open(CACHE_NAME);
+      return await cache.match("offline.html");
     })
   );
 });
